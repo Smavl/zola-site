@@ -3,9 +3,14 @@ base_url = "https://example.com"
 
 title = "Smavl - Jots and such"
 
-taxonomies = [{ name = "tags" }]
-
-
+taxonomies = [
+  { name = "tags" },
+  { name = "difficulty" },
+  { name = "ctf" },
+  # { name = "writeup" },
+]
+# actual theme - "apollo"
+theme = "apollo"
 
 
 # Whether to automatically compile all Sass files in the sass directory
@@ -14,6 +19,14 @@ compile_sass = true
 # Whether to build a search index to be used later on by a JavaScript library
 build_search_index = true
 
+[search]
+
+include_title = true
+include_description = true
+include_path = true
+include_content = true
+index_format = "elasticlunr_json"
+
 [markdown]
 # Whether to do syntax highlighting
 # Theme can be customised by setting the `highlight_theme` variable to a theme supported by Zola
@@ -21,9 +34,15 @@ highlight_code = true
 
 # Put all your custom variables here
 [extra]
-theme = "apollo"
+# theme of apollo
+theme = "auto"
+logo = "static/icon/hhb.png"
+# favicon = "/icon/hhb.png"
+favicon = "/icon/facicon.ico"
+
 socials = [
-  # Configure socials here
+    # { name = "twitter", url = "https://twitter.com/not_matthias", icon = "twitter" },
+    { name = "github", url = "https://github.com/smavl/", icon = "github" },
 ]
 menu = [
   # Configure menu bar here
@@ -32,6 +51,14 @@ menu = [
     { name = "/tags", url = "/tags", weight = 3 }, 
     { name = "/about", url = "/about", weight = 4 },
 ]
+
+
 toc = true
 mathjax = true
 mathjax_dollar_inline_enable = true
+
+
+
+# NOTE: 
+# consider adding:
+# - goatcount

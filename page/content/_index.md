@@ -1,8 +1,8 @@
 +++
-title= "Apollo Theme"
+title= "Welcome to my page"
 template = "homepage.html"
 +++
 
-Thanks for checking out this theme!
+This is a personal page where I share my Cyber Spelunking.
 
-Checkout all the [options you can configure](./posts/configuration) and the [example pages](./tags/example/).
+I 
