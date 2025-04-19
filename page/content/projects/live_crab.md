@@ -11,4 +11,3 @@ weight = 1
 link_to = "https://github.com/smavl/live-crab"
 +++
 
-Example project page
