@@ -203,7 +203,7 @@ But how can we shorten `sh`?
 After a some digging i found that I can use `. file`
 
 i.e.:
-```text
+```
 $ help .
 .: . filename [arguments]
     Execute commands from a file in the current shell.

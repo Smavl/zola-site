@@ -334,7 +334,7 @@ Enter the file path to read (or type 'exit' to quit): <FILE>
 So how can we leverage this to find some credentials and get a shell as a user?
 
 `/etc/passwd`:
-```text
+```
 root:x:0:0:root:/root:/bin/bash
 daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
 bin:x:2:2:bin:/bin:/usr/sbin/nologin

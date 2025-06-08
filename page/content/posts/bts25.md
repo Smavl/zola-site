@@ -51,7 +51,7 @@ See [LDIF examples](https://www.ibm.com/docs/en/sdse/6.4.0?topic=ldif-examples) 
 
 This means that the flag will be appended into this file:
 
-```ldif
+```
 dn: ou=people,dc=bts,dc=ctf
 objectClass: organizationalUnit
 ou: people
@@ -113,7 +113,7 @@ The keys parts i want to highlight are:
 
 We can do LDAP injection, and we have to focus on:
 
-```ldap
+```
 (&(employeeType=active)(uid=INPUT)(userPassword=INPUT))
 ```
 
@@ -234,7 +234,7 @@ def prune_charset(prefix,charset):
 ```
 
 
-```text
+```
 [spagok@gok]$ python exp.py
 Iterations : 69
 Pruned charset : _bcdjlnptyBCDJLNPTY0134}
