@@ -4,7 +4,7 @@ date = "2025-05-09"
 weight = 0
 
 [taxonomies]
-tags=["ldap-injection", "ldap", "ctf"]
+tags=["ldap-injection", "ldap", "ctf", "injection", "command-injection", "SSTI", "jail"]
 ctf=["BTS"]
 +++
 

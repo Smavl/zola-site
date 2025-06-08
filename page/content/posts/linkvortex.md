@@ -3,8 +3,10 @@ title = "Linkvortex - HTB Machine"
 date = "2025-04-09"
 weight = 0
 [taxonomies]
-tags=["HTB", "Machine", ]
+tags=["HTB", "Machine", "git-dumper", "docker", "ghost"]
 difficulty=["easy"]
+writeup=["HTB-machine"]
+os=["linux"]
 +++
 
 

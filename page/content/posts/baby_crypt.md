@@ -6,6 +6,7 @@ weight = 0
 [taxonomies]
 tags=["HTB", "challenge", "reversing"]
 difficulty=["easy"]
+writeup=["HTB-challenge"]
 +++
 
 # Information and behavior
