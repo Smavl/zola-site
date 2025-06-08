@@ -56,8 +56,13 @@ menu = [
 toc = true
 mathjax = true
 mathjax_dollar_inline_enable = true
+katex_enable = true
+fancy_code = true
 
 
+[extra.analytics.goatcounter]
+user = "smavl1337"
+host = "goatcounter.com" # default= goatcounter.com
 
 # NOTE: 
 # consider adding:
