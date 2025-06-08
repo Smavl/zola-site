@@ -24,7 +24,3 @@ $text-1: lighten($bg-0, 60%);
     filter: invert(1);
   }
 }
-// HACK: Dont invert second icon "HTB logo"
-:root.dark .social:nth-child(2) > img {
-  filter: none !important;
-}

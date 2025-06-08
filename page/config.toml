@@ -1,4 +1,4 @@
-# The URL the site will be built for
+# The URL the site will be built for 
 base_url = "https://example.com"
 
 title = "Smavl - Jots and such"
@@ -32,19 +32,24 @@ index_format = "elasticlunr_json"
 # Whether to do syntax highlighting
 # Theme can be customised by setting the `highlight_theme` variable to a theme supported by Zola
 highlight_code = true
-highlight_theme = "ayu-light"
+highlight_theme = "ayu-light" # fits better with theme, but is dull
+
+# NOTE: bad in light mode:
+#highlight_theme = "gruvbox-light" # fits better with theme, but is dull
+# highlight_theme = "dracula" # Might be too vibrant 
+
 
 # Put all your custom variables here
 [extra]
 # theme of apollo
-theme = "auto"
-logo = "static/icon/hhb.png"
-# favicon = "/icon/hhb.png"
-favicon = "/icon/facicon.ico"
+# theme = "auto"
+theme = "toggle"
+favicon = "/icons/favicon.ico"
 
 socials = [
     # { name = "twitter", url = "https://twitter.com/not_matthias", icon = "twitter" },
     { name = "github", url = "https://github.com/smavl/", icon = "github" },
+    { name = "htb", url = "https://app.hackthebox.com/profile/515403", icon = "Cube_HTB" },
 ]
 menu = [
   # Configure menu bar here
@@ -60,6 +65,8 @@ mathjax = true
 mathjax_dollar_inline_enable = true
 katex_enable = true
 fancy_code = true
+
+dynamic_note = true
 
 [extra.analytics]
 enabled = true

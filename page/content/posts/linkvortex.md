@@ -318,8 +318,9 @@ Lets see if we can identify the version of **ghost**. I always try this as the f
 
 We can see that the version of **Ghost** is `5.58.0`, which is vulnerable to `CVE-2023-40028`, a *Arbitrary File Read* Exploit.
 
-Background of the CVE:
-> Ghost is an open source content management system. Versions prior to 5.59.1 are subject to a vulnerability which allows authenticated users to upload files that are symlinks. This can be exploited to perform an arbitrary file read of any file on the host operating system. Site administrators can check for exploitation of this issue by looking for unknown symlinks within Ghost's `content/` folder. Version 5.59.1 contains a fix for this issue. All users are advised to upgrade. There are no known workarounds for this vulnerability. 
+{{ note(clickable=true, hidden=true, header="Background of the CVE:", body=" Ghost is an open source content management system. Versions prior to 5.59.1 are subject to a vulnerability which allows authenticated users to upload files that are symlinks. This can be exploited to perform an arbitrary file read of any file on the host operating system. Site administrators can check for exploitation of this issue by looking for unknown symlinks within Ghost's `content/` folder. Version 5.59.1 contains a fix for this issue. All users are advised to upgrade. There are no known workarounds for this vulnerability. ") }}
+
+
 
 Searching for an exploit I found: [Ghost Arbitrary File Read Exploit (CVE-2023-40028) By 0xDTC (Github) ](https://github.com/0xDTC/Ghost-5.58-Arbitrary-File-Read-CVE-2023-40028)
 
@@ -441,7 +442,7 @@ And we're in!
 
 Especially for easy boxes I always do `sudo -l` before doing any enumeration, and we have a hit:
 
-```
+```bash
 bob@linkvortex:~$ sudo -l
 Matching Defaults entries for bob on linkvortex:
     env_reset, mail_badpass,
@@ -457,9 +458,9 @@ Before looking at the script, lets state what we might be able to exploit:
 - `../clean_symlink.sh *.png` - We can exploit wildcard expansions
 
 
+**/opt/ghost/clean_symlink.sh:**
 
-```bash
-bob@linkvortex:~$ cat /opt/ghost/clean_symlink.sh
+```bash,linenos
 #!/bin/bash
 
 QUAR_DIR="/var/quarantined"
@@ -600,3 +601,4 @@ uid=0(root) gid=0(root) groups=0(root)
 - Note your findings (Forgotting the `.json` file, when enumerating the file system as `node`)
 - Be vary of rate limiting
 - try one more layer/link (Especially when symlinks are involved)
+
