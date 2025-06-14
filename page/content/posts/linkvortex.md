@@ -586,7 +586,7 @@ root@linkvortex:~# id
 uid=0(root) gid=0(root) groups=0(root)
 ```
 
-# Wrap
+# Misc
 
 ## Tools 
 - `ffuf` 
@@ -598,7 +598,6 @@ uid=0(root) gid=0(root) groups=0(root)
 
 ## Key take-aways
 - Remember enumerate subdomains
-- Note your findings (Forgotting the `.json` file, when enumerating the file system as `node`)
 - Be vary of rate limiting
 - try one more layer/link (Especially when symlinks are involved)
 
