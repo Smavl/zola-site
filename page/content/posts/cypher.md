@@ -3,7 +3,7 @@ title = "Cypher - HTB Machine"
 date = "2025-12-20"
 weight = 0
 [taxonomies]
-tags=["HTB", "Machine", "cypher", "neo4j", "command-injection", "bbot", "tool", "SUID"]
+tags=["HTB", "Machine", "cypher", "neo4j", "command-injection", "bbot", "tool"]
 difficulty=["medium"]
 writeup=["HTB-machine"]
 os=["linux"]
@@ -181,7 +181,7 @@ and likewise the hash:
 10.129.215.22 - - [22/May/2025 21:30:47] "GET /?value=9f54ca4c130be6d529a56dee59dc2b2090e43acf HTTP/1.1" 200 -
 ```
 
-However the hash does not crack. Input the preimage of the hash to login.
+However the hash does not crack, and we would need that preimage of the hash to login.
 
 ## Bypass login
 
