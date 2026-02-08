@@ -31,13 +31,16 @@ index_format = "elasticlunr_json"
 [markdown]
 # Whether to do syntax highlighting
 # Theme can be customised by setting the `highlight_theme` variable to a theme supported by Zola
-highlight_code = true
-highlight_theme = "ayu-light" # fits better with theme, but is dull
+# highlight_code = true
+# highlight_theme = "ayu-light" # fits better with theme, but is dull
 
 # NOTE: bad in light mode:
 #highlight_theme = "gruvbox-light" # fits better with theme, but is dull
 # highlight_theme = "dracula" # Might be too vibrant 
 
+[markdown.highlighting]
+light_theme = "github-light"
+dark_theme = "github-dark"
 
 # Put all your custom variables here
 [extra]
