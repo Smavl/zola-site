@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+
+{% component content(page: map, config: map) %}
+<div class="visible-element-observer-root" data-selector="main article p">
+    <main>
+        <article>
+            <div class="title">
+                {{<post.page_header title={page.title} />}}
+
+                <div class="meta">
+                    {% if page.date %}
+                        Posted on <time>{{ page.date | date(format="%Y-%m-%d") }}</time>
+                    {% endif %}
+
+                    {% if page.updated %}
+                        :: Updated on <time>{{ page.updated | date(format="%Y-%m-%d") }}</time>
+                    {% endif %}
+
+                    {% if page.extra?.read_time %}
+                        :: <time>{{ page.reading_time }}</time> Min Read
+                    {% endif %}
+
+                    {# View the page on GitHub #}
+                    {% if page.extra?.repo_view or config.extra?.repo_view %}
+                        {% if page.extra?.repo_url %}
+                            {% set repo_url = page.extra.repo_url %}
+                        {% elif config.extra?.repo_url %}
+                            {% set repo_url = config.extra.repo_url %}
+                        {% else %}
+                            {% set repo_url = false %}
+                        {% endif %}
+
+                        {% if repo_url %}
+                            {% set final_url = repo_url ~ page.relative_path %}
+                            :: <a href="{{ final_url }}" target="_blank" rel="noopener noreferrer">Source Code</a>
+                        {% endif %}
+                    {% endif %}
+
+                    {% if page.taxonomies?.authors %}
+                        <span class="authors-label">::</span>
+                        <span class="authors">
+                            {%- for author in page.taxonomies.authors %}
+                                <a href="{{ get_taxonomy_url(kind='authors', term=author, lang=page.lang) }}"
+                                   class="post-authors">{{ author }}</a>
+                            {% endfor %}
+                        </span>
+                    {% endif %}
+
+                    {% if page.taxonomies?.ctf %}
+                        <span class="tags-label">:: CTF:</span>
+                        <span class="tags">
+                            {%- for ctf in page.taxonomies.ctf %}
+                                <a href="{{ get_taxonomy_url(kind='ctf', term=ctf, lang=page.lang) }}"
+                                   class="post-tag">{{ ctf }}</a>{% if not loop.last %}, {% endif %}
+                            {% endfor %}
+                        </span>
+                    {% endif %}
+
+                    {% if page.taxonomies?.os %}
+                        <span class="tags-label">:: OS:</span>
+                        <span class="tags">
+                            {%- for os in page.taxonomies.os %}
+                                <a href="{{ get_taxonomy_url(kind='os', term=os, lang=page.lang) }}"
+                                   class="post-tag">{{ os }}</a>{% if not loop.last %}, {% endif %}
+                            {% endfor %}
+                        </span>
+                    {% endif %}
+
+                    {% if page.taxonomies?.difficulty %}
+                        <span class="tags-label">:: Difficulty:</span>
+                        <span class="tags">
+                            {%- for difficulty in page.taxonomies.difficulty %}
+                                <a href="{{ get_taxonomy_url(kind='difficulty', term=difficulty, lang=page.lang) }}"
+                                   class="post-tag">{{ difficulty }}</a>{% if not loop.last %}, {% endif %}
+                            {% endfor %}
+                        </span>
+                    {% endif %}
+
+                    {% if page.taxonomies?.tags %}
+                        <span class="tags-label">:: Tags:</span>
+                        <span class="tags">
+                            {%- for tag in page.taxonomies.tags | sort %}
+                                <a href="{{ get_taxonomy_url(kind='tags', term=tag, lang=page.lang) }}"
+                                   class="post-tag">{{ tag }}</a>{% if not loop.last %}, {% endif %}
+                            {% endfor %}
+                        </span>
+                    {% endif %}
+
+                    {% if page.draft %}
+                        <span class="draft-label">DRAFT</span>
+                    {% endif %}
+                </div>
+            </div>
+
+            {% if page.extra?.tldr %}
+                <div class="tldr">
+                    <strong>tl;dr:</strong>
+                    {{ page.extra.tldr }}
+                </div>
+            {% endif %}
+
+            <section class="body">
+                {{ page.content | safe }}
+            </section>
+        </article>
+    </main>
+</div>
+{% endcomponent content %}
+
+{% block main_content %}
+    {{<content page={page} config={config} />}}
+{% endblock main_content %}
+
+{% block right_content %}
+    {% if config.extra?.toc | default(value=false) and page?.toc %}
+        {% include "partials/toc.html" %}
+    {% endif %}
+{% endblock right_content %}

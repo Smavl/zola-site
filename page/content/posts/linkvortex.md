@@ -318,7 +318,9 @@ Lets see if we can identify the version of **ghost**. I always try this as the f
 
 We can see that the version of **Ghost** is `5.58.0`, which is vulnerable to `CVE-2023-40028`, a *Arbitrary File Read* Exploit.
 
-{{ note(clickable=true, hidden=true, header="Background of the CVE:", body=" Ghost is an open source content management system. Versions prior to 5.59.1 are subject to a vulnerability which allows authenticated users to upload files that are symlinks. This can be exploited to perform an arbitrary file read of any file on the host operating system. Site administrators can check for exploitation of this issue by looking for unknown symlinks within Ghost's `content/` folder. Version 5.59.1 contains a fix for this issue. All users are advised to upgrade. There are no known workarounds for this vulnerability. ") }}
+{% <note clickable={true} hidden={true} header="Background of the CVE:"> %}
+Ghost is an open source content management system. Versions prior to 5.59.1 are subject to a vulnerability which allows authenticated users to upload files that are symlinks. This can be exploited to perform an arbitrary file read of any file on the host operating system. Site administrators can check for exploitation of this issue by looking for unknown symlinks within Ghost's `content/` folder. Version 5.59.1 contains a fix for this issue. All users are advised to upgrade. There are no known workarounds for this vulnerability.
+{% </note> %}
 
 
 
@@ -600,4 +602,3 @@ uid=0(root) gid=0(root) groups=0(root)
 - Remember enumerate subdomains
 - Be vary of rate limiting
 - try one more layer/link (Especially when symlinks are involved)
-

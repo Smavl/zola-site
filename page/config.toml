@@ -78,3 +78,9 @@ enabled = true
 [extra.analytics.goatcounter]
 enabled = true # prob not needed here
 user = "smavl1337"
+
+[extra.analytics.umami]
+website_id = ""
+
+[extra.analytics.google]
+tracking_id = ""
