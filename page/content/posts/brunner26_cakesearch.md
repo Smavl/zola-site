@@ -17,7 +17,7 @@ CakeSearch is a mobile challenge from brunnerctf26 with an aspect of web to it. 
 
 There's a handout with a single APK file: `CakeSearch.apk`.
 
-The first thing we are greeted with is a login/registration page. After registering and logging in we see a board for job positions, we also press on the post to see the details of the position.
+The first thing we are greeted with is a login/registration page. After registering and logging in we see a board for job positions. We can also press on an entry to see the details of the position.
 
 <img
     src="/imgs/ctf/brunner26-mobile/pasted-image-20260827123811.png"
@@ -41,11 +41,10 @@ Let's have a closer look at the source code.
 
 # Static Analysis
 
-For conducting the static analysis I fired up JADX.
-
+For conducting the static analysis, I fired up JADX.
 
 {% <note clickable={true} hidden={false} header="Analysis note"> %}
-In the analysis below I have already have renamed some classes and variables. Most of these new names can be derived from context e.g. other function calls, `toString()` implementations. Otherwise human reason was used. I've ommited the documentation of renaming in the name of clarity.
+In the analysis below I have already have renamed some classes and variables. Most of these new names can be derived from context e.g. other function calls, `toString()` implementations. Otherwise human reasoning was used. I've omitted the documentation of renaming in the name of clarity.
 
 {% </note> %}
 
@@ -82,7 +81,7 @@ $ curl https://cakesearch.challs.brunnerne.xyz:31000/ -k -s | grep script
 <script src="/static/portal.js"></script>
 ```
 
-In the `/static/script.js` file we can see that some `internal` positions are only rendered for admins:
+In the `/static/portal.js` file we can see that some `internal` positions are only rendered for admins:
 ```js
 function renderFeed() {
 	detail.classList.remove("on");
@@ -128,11 +127,11 @@ function unseal(blob) {
 }
 ```
 
-This means that the the JavaScript invokes the decrypt method from the app through the `CakeBridge` to decrypt the details of the positions, which then is displayed on the device. More imporatantly it means that the key is in the app, and not on the backend where it belongs!
+This means that the JavaScript invokes the decrypt method from the app through the `CakeBridge` to decrypt the details of the positions, which then is displayed on the device. More importantly it means that the key is in the app, and not on the backend where it belongs!
 
 > Also, the native library `libcakesearch.so` is used in the `TokenSigner` class, which we will exploit later.
 
-This also means that if we do a simple request with valid token, the API will return just the ciphertext:
+This also means that if we do a simple request with a valid token, the API will return just the ciphertext:
 ```bash
 $ curl https://cakesearch.challs.brunnerne.xyz:31000/api/positions/201/details -k \
     -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzbWF2bDEzMzdAc21hdmwucm9ja3MiLCJ1aWQiOjYsInJvbGUiOiJ1c2VyIiwiZXhwIjoxNzg3ODM4MDMxLCJpYXQiOjE3ODc4MzA4MzF9.BBeOR7Vyj-3m6eB07V68gmwdSKGvckvMqzAEg-bL408"  -s | jq . ; echo
@@ -231,7 +230,7 @@ At this point we could start to analyze `dk.brunnerne.cakesearch.crypto`and its 
 
 ---
 
-Figuring out how to setup a proxy is an exercise left to the reader, however i will give distribute these lines of xml to you:
+Figuring out how to setup a proxy is an exercise left to the reader, however i will distribute these lines of xml to you:
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -251,7 +250,7 @@ Figuring out how to setup a proxy is an exercise left to the reader, however i w
 
 ---
 
-Having the proxy setup, we can refresh by pulling up in the app, and watch the request arrive in _Burp_
+Having the proxy up, we can refresh by pulling up in the app, and watch the request arrive in _Burp_
 
 ```json
 {
@@ -298,7 +297,7 @@ Having the proxy setup, we can refresh by pulling up in the app, and watch the r
 "summary": "RESTRICTED [...] may retrieve the full record at /api/positions/1337/details.",
 ```
 
-With the token intercepted with burp we can try to fetch the details
+With the token intercepted with burp we can try to fetch the details.
 
 ```bash
 $ curl https://cakesearch.challs.brunnerne.xyz:31000/api/positions/1337/details -k \
@@ -393,7 +392,7 @@ Java.performNow(function(){
 ```
 This will print the string that gets signed.
 
-Then run `frida` while the app is running. The refresh the page to trigger the `sign()` method
+Then run `frida` while the app is running, and refresh the page to trigger the `sign()` method.
 ```bash
 $ frida -U -n CakeSearch -l exp.js
 [....]
@@ -401,7 +400,7 @@ tokenSigner class found <class: dk.brunnerne.cakesearch.crypto.TokenSigner>
 [GM1901::CakeSearch ]-> TokenSigner.nativeSign is called: str={"sub":"smavl1337@smavl.rocks","uid":6,"role":"user","exp":1787851370,"iat":1787844170}
 ```
 
-Now we only need to replace `"role":"user` with `"role":"admin"` before signing the string.
+Now we only need to replace `"role":"user"` with `"role":"admin"` before signing the string.
 
 
 We can do this by changing the string passed into the method:
