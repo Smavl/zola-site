@@ -144,8 +144,23 @@ $ curl https://cakesearch.challs.brunnerne.xyz:31000/api/positions/201/details -
 ```
 
 {% <note clickable={true} hidden={true} header="How did you get the token?"> %}
-For obtaining the token I time travelled into the future, to the moment where i had sat up my proxy. More about that later!
-
+<!-- For obtaining the token I time travelled into the future, to the moment where i had sat up my proxy. More about that later! -->
+I obtained the token by intercepting with my proxy. I won't go in to full details about setting it up, instead I'll leave it as an exercise for the reader. Hint:
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <base-config cleartextTrafficPermitted="false">
+        <trust-anchors>
+            <certificates src="system"/>
+            <certificates src="user"/>
+        </trust-anchors>
+    </base-config>
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="false">10.0.2.2
+        </domain>
+    </domain-config>
+</network-security-config>
+```
 {% </note> %}
 
 Looking closer at `CakeBridge` on the Android side of things, we see some of the methods that can be invoked. This is due to the annotation: `@JavascriptInterface`
@@ -228,29 +243,29 @@ As we can see below the script calls `load()` when run. Thus, `/api/positions` i
 
 At this point we could start to analyze `dk.brunnerne.cakesearch.crypto`and its methods. However, I will save that for later and look at the request through a proxy.
 
----
+<!-- --- -->
+<!---->
+<!-- Figuring out how to setup a proxy is an exercise left to the reader, however i will distribute these lines of xml to you: -->
+<!---->
+<!-- ```xml -->
+<!-- <?xml version="1.0" encoding="utf-8"?> -->
+<!-- <network-security-config> -->
+<!--     <base-config cleartextTrafficPermitted="false"> -->
+<!--         <trust-anchors> -->
+<!--             <certificates src="system"/> -->
+<!--             <certificates src="user"/> -->
+<!--         </trust-anchors> -->
+<!--     </base-config> -->
+<!--     <domain-config cleartextTrafficPermitted="true"> -->
+<!--         <domain includeSubdomains="false">10.0.2.2 -->
+<!--         </domain> -->
+<!--     </domain-config> -->
+<!-- </network-security-config> -->
+<!-- ``` -->
+<!---->
+<!-- --- -->
 
-Figuring out how to setup a proxy is an exercise left to the reader, however i will distribute these lines of xml to you:
-
-```xml
-<?xml version="1.0" encoding="utf-8"?>
-<network-security-config>
-    <base-config cleartextTrafficPermitted="false">
-        <trust-anchors>
-            <certificates src="system"/>
-            <certificates src="user"/>
-        </trust-anchors>
-    </base-config>
-    <domain-config cleartextTrafficPermitted="true">
-        <domain includeSubdomains="false">10.0.2.2
-        </domain>
-    </domain-config>
-</network-security-config>
-```
-
----
-
-Having the proxy up, we can refresh by pulling up in the app, and watch the request arrive in _Burp_
+We can refresh by pulling up in the app, and watch the request arrive in _Burp_
 
 ```json
 {
