@@ -3,15 +3,10 @@ title = "About"
 path = "about"
 +++
 
-I am a Computer Science student with a wide array of interests. Some of them are in the domains of:
+I'm a Computer Science student with a wide array of interests. Some of them are in the domains of: Web security, cryptography, system security, reverse engineering and binary exploitation, misc and osint.
 
-- Cyber-Security
-    - Web & Application Security 
-    - Cryptography 
-    - Privilege escalation
-    - Reverse engineering & malware
-    - Tools & frameworks
-- Programming Languages & Logic and computability
-- Languages
-- Philosophy 
-- Literature
+
+CVE credits:
+
+- SiYuan XSS (+RCE in electron): CVE-2026-100643 CVE-2026-100645
+- Docling Arbitrary read/write: CVE-2026-105744
